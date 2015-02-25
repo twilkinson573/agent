@@ -5,15 +5,12 @@ spec = Gem::Specification.new do |s|
   s.version = Agent::VERSION
   s.author = 'Thomas Wilkinson'
   s.email = 'twilkinson573@gmail.com'
-  s.homepage = 'http://github.com/twilkinson573'
+  s.homepage = 'http://github.com/twilkinson573/agent'
   s.platform = Gem::Platform::RUBY
   s.summary = 'Allows users to interact with the Energy Transition Model through the terminal'
   s.files = `git ls-files`.split("
 ")
   s.require_paths << 'lib'
-  s.has_rdoc = true
-  s.extra_rdoc_files = ['README.rdoc','agent.rdoc']
-  s.rdoc_options << '--title' << 'agent' << '--main' << 'README.rdoc' << '-ri'
   s.bindir = 'bin'
   s.executables << 'agent'
   s.add_development_dependency('rake')
