@@ -3,11 +3,11 @@ require File.join([File.dirname(__FILE__),'lib','agent','version.rb'])
 spec = Gem::Specification.new do |s| 
   s.name = 'agent'
   s.version = Agent::VERSION
-  s.author = 'Your Name Here'
-  s.email = 'your@email.address.com'
-  s.homepage = 'http://your.website.com'
+  s.author = 'Thomas Wilkinson'
+  s.email = 'twilkinson573@gmail.com'
+  s.homepage = 'http://github.com/twilkinson573'
   s.platform = Gem::Platform::RUBY
-  s.summary = 'A description of your project'
+  s.summary = 'Allows users to interact with the Energy Transition Model through the terminal'
   s.files = `git ls-files`.split("
 ")
   s.require_paths << 'lib'
