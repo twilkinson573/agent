@@ -39,6 +39,7 @@ desc 'Display a specific ETM scenario by providing its ID'
 arg_name 'scenario ID number'
 command :show do |c|
 
+  c.desc 'Display complete scenario info including user modified slider settings'
   c.switch [:d, :detailed]
 
   c.action do |global_options,options,args|
