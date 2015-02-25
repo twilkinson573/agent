@@ -12,6 +12,9 @@ version Agent::VERSION
 subcommand_option_handling :normal
 arguments :strict
 
+# TODO Set global config author variable
+# TODO Set glabal 'my scenarios' array/yml file etc
+
 desc 'Returns a json object of all parameters of each market defined in the ETM'
 arg_name 'area code (OPTIONAL)'
 command :areas do |c|
@@ -46,6 +49,39 @@ command :show do |c|
     puts JSON.pretty_generate(JSON.parse(scenario))
   end
 end
+
+desc 'Creates a new ETM scenario'
+command :create do |c|
+
+  c.action do |global_options,options,args|
+  puts 'New scenario'
+  puts 'Enter title:'
+  title = STDIN.gets.chomp
+
+  puts 'Enter area code (default NL):'
+  area_code = STDIN.gets.chomp.downcase
+  %w(uk eu de pl fr es).include?(area_code) ? area_code : area_code = 'nl'
+
+  puts 'Enter end year (default 2030):'
+  end_year = STDIN.gets.chomp
+  
+  puts "area code: #{area_code}"
+
+  %x(curl -i -X POST -H "Content-Type: application/json" -d '{"scenario": 
+     {"title": "#{title}", "area_code": "#{area_code}", 
+     "end_year": "#{end_year}", "source": "agent"}}' http://et-engine.com/api/v3/scenarios)
+
+  # return scenario and URL
+  end
+end
+
+desc 'Update metadata or add input parameters to one of your scenarios'
+command :update do |c|
+  # Get scenario by id
+  # Use STDIN to update metadata/add inputs until 'finish'
+  # update scenario with hash of all new params
+end
+
 
 pre do |global,command,options,args|
   # Pre logic here

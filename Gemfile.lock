@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    agent (0.0.1)
+    agent-s (0.0.2)
       gli (= 2.12.3)
 
 GEM
@@ -40,7 +40,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  agent!
+  agent-s!
   aruba
   rake
   rdoc
