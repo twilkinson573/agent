@@ -1,14 +1,7 @@
 #!/usr/bin/env ruby
 require 'gli'
 require 'json'
-begin # XXX: Remove this begin/rescue before distributing your app
 require 'agent'
-rescue LoadError
-  STDERR.puts "In development, you need to use `bundle exec bin/agent` to run your app"
-  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
-  STDERR.puts "Feel free to remove this message from bin/agent now"
-  exit 64
-end
 
 include GLI::App
 
