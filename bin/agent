@@ -21,11 +21,9 @@ arg_name 'area_code(OPTIONAL)'
 command :areas do |c|
   c.action do |global_options,options,args|
     unless args.empty?
-      areas = %x(curl -i http://et-engine.com/api/v3/areas/"#{ args.first }")
-      areas = '{' + areas.split('{', 2).last
+      areas = %x(curl http://et-engine.com/api/v3/areas/"#{ args.first }")
     else
-      areas = %x(curl -i http://et-engine.com/api/v3/areas/)
-      areas = "[" + areas.split('[').last
+      areas = %x(curl http://et-engine.com/api/v3/areas/)
     end
 
     puts JSON.pretty_generate(JSON.parse(areas))
@@ -42,11 +40,10 @@ command :show do |c|
   c.action do |global_options,options,args|
     exit_now!('id is required') if args.empty?
     if options[:d]
-      scenario = %x(curl -i http://et-engine.com/api/v3/scenarios/"#{ args.first }"?detailed=true)
+      scenario = %x(curl http://et-engine.com/api/v3/scenarios/"#{ args.first }"?detailed=true)
     else
-      scenario = %x(curl -i http://et-engine.com/api/v3/scenarios/"#{ args.first }")
+      scenario = %x(curl http://et-engine.com/api/v3/scenarios/"#{ args.first }")
     end
-    scenario = '{' + scenario.split('{', 2).last
     puts JSON.pretty_generate(JSON.parse(scenario))
   end
 end
@@ -74,7 +71,7 @@ command :create do |c|
          {"title": "#{ title }", "area_code": "#{ area_code }", 
          "end_year": "#{ end_year }", "source": "agent"}}' http://et-engine.com/api/v3/scenarios)
     else
-      template_data = JSON.parse(%x(curl -i http://et-engine.com/api/v3/scenarios/"#{ template }"))
+      template_data = JSON.parse(%x(curl http://et-engine.com/api/v3/scenarios/"#{ template }"))
       puts template_data
 
 #      %x(curl -i -X POST -H "Content-Type: application/json" -d '{"scenario": 
@@ -97,12 +94,10 @@ arg_name 'input_name(OPTIONAL)'
 command :inputs do |c|
   c.action do |global_options,options,args|
     unless args.empty?
-      inputs = %x(curl -i http://et-engine.com/api/v3/inputs/"#{ args.first }")
+      inputs = %x(curl http://et-engine.com/api/v3/inputs/"#{ args.first }")
     else
-      inputs = %x(curl -i http://et-engine.com/api/v3/inputs/)
+      inputs = %x(curl http://et-engine.com/api/v3/inputs/)
     end
-    inputs = '{' + inputs.split('{', 2).last
-
     puts JSON.pretty_generate(JSON.parse(inputs))
   end
 end
@@ -110,8 +105,7 @@ end
 desc 'Lists each available template users can use as a starting point for their scenarios'
 command :templates do |c|
   c.action do |global_options,options,args|
-    templates = %x(curl -i http://et-engine.com/api/v3/scenarios/templates)
-    templates = "[" + templates.split('[').last
+    templates = %x(curl http://et-engine.com/api/v3/scenarios/templates)
 
     puts JSON.pretty_generate(JSON.parse(templates))
   end
